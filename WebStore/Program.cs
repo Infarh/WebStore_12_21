@@ -1,11 +1,21 @@
 var builder = WebApplication.CreateBuilder(args);
 
+#region Настройка построителя приложения - определение содержимого
+
 //builder.Configuration.AddCommandLine(args);
 
-var services = builder.Services;
-services.AddControllersWithViews();
+//builder.Logging.AddFilter("Microsoft", LogLevel.Warning);
 
-var app = builder.Build();
+var services = builder.Services;
+services.AddControllersWithViews(); 
+
+#endregion
+
+var app = builder.Build(); // Сборка приложения
+
+//app.Urls.Add("http://+:80"); // - если хочется обеспечить видимость приложения в локальной сети
+
+#region Конфигурирование конвейера обработки входящих соединения
 
 if (app.Environment.IsDevelopment())
 {
@@ -27,6 +37,11 @@ app.MapGet("/throw", () =>
 //app.MapDefaultControllerRoute();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}"); 
 
+#endregion
+
+// Запуск приложения
+
+//app.Start(); - не работает! Нужно Run()
 app.Run();
