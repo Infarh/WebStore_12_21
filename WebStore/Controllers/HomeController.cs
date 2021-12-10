@@ -6,7 +6,8 @@ namespace WebStore.Controllers
     {
         public IActionResult Index()
         {
-            return Content("Данные из первого контроллера");
+            //return Content("Данные из первого контроллера");
+            return View();
         }
     }
 }
