@@ -1,15 +1,19 @@
-﻿<!DOCTYPE html>
+﻿<partial name="Partial/_Slider"/>
 
-<html>
-<head>
-    <title>Главная страница</title>
-</head>
-<body>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <partial name="Partial/_LeftSideBar"/>
+            </div>
 
-<h3>Заголовок</h3>
-<p>Привет из первого представления!</p>
+            <div class="col-sm-9 padding-right">
+                <partial name="Partial/_Products"/>
 
-<a href="~/home/employees">Список сотрудников</a>
+                <partial name="Partial/_CategoryTab"/>
 
-</body>
-</html>
+                <partial name="Partial/_RecomendedItems"/>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,48 @@
+﻿@model WebStore.Models.Employee
+
+@{
+    ViewData["Title"] = "Информация о сотруднике id:" + Model.Id;
+}
+
+<div class="container">
+    <div>
+        <h4>Сотрудник - @ViewBag.SelectedEmployee.FirstName</h4>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Patronymic)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Patronymic)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Age)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Age)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
+        <a asp-action="Index">Назад к списку</a>
+    </div>
+</div>
