@@ -21,10 +21,14 @@ namespace WebStore.Controllers
 
         public IActionResult Details(int Id)
         {
+            ViewData["TestValue"] = 123;
+
             var employee = __Employees.FirstOrDefault(e => e.Id == Id);
 
             if (employee is null)
                 return NotFound();
+
+            ViewBag.SelectedEmployee = employee;
 
             return View(employee);
         }
