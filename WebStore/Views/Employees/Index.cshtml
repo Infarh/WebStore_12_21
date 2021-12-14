@@ -24,7 +24,7 @@
                 <td>@employee.Patronymic</td>
                 <td>@employee.Age</td>
                 <td>
-                    <a href="~/home/employee/@employee.Id">инфо.</a>
+                    <a asp-action="Details" asp-route-Id="@employee.Id" asp-route-Info="123">инфо.</a>
                 </td>
             </tr>
         }
