@@ -1,13 +1,19 @@
+using WebStore.Infrastructure.Conventions;
+using WebStore.Infrastructure.Middleware;
+using WebStore.Services;
+using WebStore.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 #region Настройка построителя приложения - определение содержимого
 
-//builder.Configuration.AddCommandLine(args);
-
-//builder.Logging.AddFilter("Microsoft", LogLevel.Warning);
-
 var services = builder.Services;
-services.AddControllersWithViews(); 
+services.AddControllersWithViews(opt =>
+{
+    opt.Conventions.Add(new TestConvention());
+});
+
+services.AddSingleton<IEmployeesData, InMemoryEmployeesData>(); // Singleton - потому что InMemory!
 
 #endregion
 
@@ -22,19 +28,15 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseStaticFiles(/*new StaticFileOptions { ServeUnknownFileTypes = true }*/);
+//app.Map("/testpath", async context => await context.Response.WriteAsync("Test middleware"));
+
+app.UseStaticFiles();
 
 app.UseRouting();
 
-// Загрузка информации из файла конфигурации
-//var configuration = app.Configuration;
-//var greetings = configuration["CustomGreetings"];
+app.UseMiddleware<TestMiddleware>();
 
-//app.MapGet("/", () => app.Configuration["CustomGreetings"]);
-app.MapGet("/throw", () =>
-{
-    throw new ApplicationException("Ошибка в программе!");
-});
+app.UseWelcomePage("/welcome");
 
 //app.MapDefaultControllerRoute();
 app.MapControllerRoute(
@@ -43,7 +45,4 @@ app.MapControllerRoute(
 
 #endregion
 
-// Запуск приложения
-
-//app.Start(); - не работает! Нужно Run()
 app.Run();
