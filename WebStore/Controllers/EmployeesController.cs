@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
 using WebStore.Data;
 using WebStore.Models;
 using WebStore.Services.Interfaces;
@@ -39,12 +40,15 @@ namespace WebStore.Controllers
             return View(employee);
         }
 
-        //public IActionResult Create() => View();
+        public IActionResult Create() => View("Edit", new EmployeeViewModel());
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
+            if (id is null)
+                return View(new EmployeeViewModel());
+
             //var employee = __Employees.FirstOrDefault(e => e.Id == id);
-            var employee = _EmployeesData.GetById(id);
+            var employee = _EmployeesData.GetById((int)id);
             if (employee is null)
                 return NotFound();
 
@@ -72,7 +76,9 @@ namespace WebStore.Controllers
                 Age = Model.Age,
             };
 
-            if (!_EmployeesData.Edit(employee))
+            if (Model.Id == 0)
+                _EmployeesData.Add(employee);
+            else if (!_EmployeesData.Edit(employee))
                 return NotFound();
 
             return RedirectToAction("Index");
