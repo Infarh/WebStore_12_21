@@ -11,6 +11,9 @@ public class TestMiddleware
 
     public async Task Invoke(HttpContext Context)
     {
+        var controller_name = Context.Request.RouteValues["controller"];
+        var action_name = Context.Request.RouteValues["action"];
+
         // Обработка информации из Context.Request
 
         var processing_task = _Next(Context); // далее здесь работает оставшаяся часть конвейера

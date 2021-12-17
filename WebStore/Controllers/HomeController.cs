@@ -6,6 +6,8 @@ public class HomeController : Controller
 {
    public IActionResult Index()
     {
+        //ControllerContext.HttpContext.Request.RouteValues
+
         //return Content("Данные из первого контроллера");
         return View();
     }
@@ -14,4 +16,6 @@ public class HomeController : Controller
     {
         return $"Hello World! {id} - {Value1}";
     }
+
+    public void Throw(string Message) => throw new ApplicationException(Message);
 }
