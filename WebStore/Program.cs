@@ -1,3 +1,5 @@
+using WebStore.Infrastructure.Conventions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 #region Настройка построителя приложения - определение содержимого
@@ -7,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Logging.AddFilter("Microsoft", LogLevel.Warning);
 
 var services = builder.Services;
-services.AddControllersWithViews(); 
+services.AddControllersWithViews(opt =>
+{
+    opt.Conventions.Add(new TestConvention());
+}); 
 
 #endregion
 
