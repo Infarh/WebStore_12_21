@@ -18,10 +18,10 @@ public class InMemoryProductData : IProductData
         //if (Filter?.SectionId != null)
         //    query = query.Where(p => p.SectionId == Filter.SectionId);
 
-        if (Filter is { SectionId: var section_id })
+        if (Filter?.SectionId is { } section_id)
             query = query.Where(p => p.SectionId == section_id);
 
-        if (Filter is { BrandId: var brand_id })
+        if (Filter?.BrandId is { } brand_id)
             query = query.Where(p => p.BrandId == brand_id);
 
         return query;
