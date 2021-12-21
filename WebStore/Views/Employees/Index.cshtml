@@ -2,65 +2,64 @@
 
 @{
     ViewData["Title"] = "Список сотрудников";
+    Layout = "_LayoutContainer";
 }
 
-<div class="container">
-    <h3>Сотрудники</h3>
+<h3>Сотрудники</h3>
     
-    <a class="btn btn-default" asp-action="Edit">Создать</a> 
-    <br/>
-    <a class="btn btn-default" asp-action="Create">Создать2</a>
+<a class="btn btn-default" asp-action="Edit">Создать</a> 
+<br/>
+<a class="btn btn-default" asp-action="Create">Создать2</a>
 
-    @if (Model.Any())
-    {
-        <table class="table">
-            <thead>
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>@Html.DisplayNameFor(m => m.Id)</th>
+            <th>@Html.DisplayNameFor(m => m.LastName)</th>
+            <th>@Html.DisplayNameFor(m => m.FirstName)</th>
+            <th>@Html.DisplayNameFor(m => m.Patronymic)</th>
+            <th>@Html.DisplayNameFor(m => m.Age)</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var employee in Model)
+        {
             <tr>
-                <th></th>
-                <th>Id</th>
-                <th>Фамилия</th>
-                <th>Имя</th>
-                <th>Отчество</th>
-                <th>Возраст</th>
-                <th></th>
+                <td>
+                    <a asp-action="Details" asp-route-Id="@employee.Id" asp-route-Info="123">
+                        <i class="fa fa-info-circle"></i>
+                    </a>
+                    <a asp-action="Edit" asp-route-Id="@employee.Id" asp-route-Info="123">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                </td>
+                <td>@employee.Id</td>
+                <td>@employee.LastName</td>
+                <td>@employee.FirstName</td>
+                <td>@employee.Patronymic</td>
+                <td>@employee.Age</td>
+                <td>
+                    <a asp-action="Delete" asp-route-Id="@employee.Id" asp-route-Info="123" class="text-danger">
+                        <i class="fa fa-trash-o"></i>
+                    </a>
+                    <form asp-action="DeleteConfirmed" asp-route-id="@employee.Id">
+                        <input type="submit" value="DD" class="btn btn-sm btn-danger"/>
+                    </form>
+                </td>
             </tr>
-            </thead>
-            <tbody>
-            @foreach (var employee in Model)
-            {
-                <tr>
-                    <td>
-                        <a asp-action="Details" asp-route-Id="@employee.Id" asp-route-Info="123">
-                            <i class="fa fa-info-circle"></i>
-                        </a>
-                        <a asp-action="Edit" asp-route-Id="@employee.Id" asp-route-Info="123">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                    </td>
-                    <td>@employee.Id</td>
-                    <td>@employee.LastName</td>
-                    <td>@employee.FirstName</td>
-                    <td>@employee.Patronymic</td>
-                    <td>@employee.Age</td>
-                    <td>
-                        <a asp-action="Delete" asp-route-Id="@employee.Id" asp-route-Info="123" class="text-danger">
-                            <i class="fa fa-trash-o"></i>
-                        </a>
-                        <form asp-action="DeleteConfirmed" asp-route-id="@employee.Id">
-                            <input type="submit" value="DD" class="btn btn-sm btn-danger"/>
-                        </form>
-                    </td>
-                </tr>
-            }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <p>Сотрудников нет...</p>
-    }
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Сотрудников нет...</p>
+}
 
-    <hr/>
+<hr/>
 
-    <a asp-controller="Home" asp-action="Index">На главную</a>
-</div>
+<a asp-controller="Home" asp-action="Index">На главную</a>

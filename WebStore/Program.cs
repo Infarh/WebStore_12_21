@@ -14,6 +14,7 @@ services.AddControllersWithViews(opt =>
 });
 
 services.AddSingleton<IEmployeesData, InMemoryEmployeesData>(); // Singleton - потому что InMemory!
+services.AddSingleton<IProductData, InMemoryProductData>();     // Singleton - потому что InMemory!
 
 #endregion
 
