@@ -17,6 +17,7 @@ services.AddControllersWithViews(opt =>
 
 services.AddDbContext<WebStoreDB>(opt => 
     opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
+services.AddTransient<IDbInitializer, DbInitializer>();
 
 services.AddSingleton<IEmployeesData, InMemoryEmployeesData>(); // Singleton - потому что InMemory!
 services.AddSingleton<IProductData, InMemoryProductData>();     // Singleton - потому что InMemory!
@@ -24,6 +25,12 @@ services.AddSingleton<IProductData, InMemoryProductData>();     // Singleton - �
 #endregion
 
 var app = builder.Build(); // Сборка приложения
+
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    var db_initializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+    await db_initializer.InitializeAsync(RemoveBefore: false);
+}
 
 //app.Urls.Add("http://+:80"); // - если хочется обеспечить видимость приложения в локальной сети
 
