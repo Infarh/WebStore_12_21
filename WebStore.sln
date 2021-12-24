@@ -9,7 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{17855D62
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsole", "Tests\TestConsole\TestConsole.csproj", "{4E36BD72-8464-4A8A-8B78-4A846E62134A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.Domain", "WebStore.Domain\WebStore.Domain.csproj", "{83F033EA-C63D-4511-B64F-C3EA3B1F589B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Domain", "WebStore.Domain\WebStore.Domain.csproj", "{83F033EA-C63D-4511-B64F-C3EA3B1F589B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.DAL", "WebStore.DAL\WebStore.DAL.csproj", "{26731857-4FBC-4587-A83D-9750F1A4E4F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{83F033EA-C63D-4511-B64F-C3EA3B1F589B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83F033EA-C63D-4511-B64F-C3EA3B1F589B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83F033EA-C63D-4511-B64F-C3EA3B1F589B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26731857-4FBC-4587-A83D-9750F1A4E4F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26731857-4FBC-4587-A83D-9750F1A4E4F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26731857-4FBC-4587-A83D-9750F1A4E4F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26731857-4FBC-4587-A83D-9750F1A4E4F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
