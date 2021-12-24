@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using WebStore.DAL.Context;
 using WebStore.Infrastructure.Conventions;
 using WebStore.Infrastructure.Middleware;
 using WebStore.Services;
@@ -12,6 +14,9 @@ services.AddControllersWithViews(opt =>
 {
     opt.Conventions.Add(new TestConvention());
 });
+
+services.AddDbContext<WebStoreDB>(opt => 
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 
 services.AddSingleton<IEmployeesData, InMemoryEmployeesData>(); // Singleton - потому что InMemory!
 services.AddSingleton<IProductData, InMemoryProductData>();     // Singleton - потому что InMemory!
