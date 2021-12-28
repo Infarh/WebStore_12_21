@@ -63,7 +63,7 @@ services.ConfigureApplicationCookie(opt =>
     opt.SlidingExpiration = true;
 });
 
-services.AddSingleton<IEmployeesData, InMemoryEmployeesData>(); // Singleton - потому что InMemory!
+//services.AddSingleton<IEmployeesData, InMemoryEmployeesData>(); // Singleton - потому что InMemory!
 //services.AddSingleton<IProductData, InMemoryProductData>();     // Singleton - потому что InMemory!
 
 services.AddScoped<IEmployeesData, SqlEmployeesData>();
