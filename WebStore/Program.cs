@@ -65,9 +65,9 @@ services.ConfigureApplicationCookie(opt =>
 
 services.AddSingleton<IEmployeesData, InMemoryEmployeesData>(); // Singleton - потому что InMemory!
 //services.AddSingleton<IProductData, InMemoryProductData>();     // Singleton - потому что InMemory!
+
+services.AddScoped<IEmployeesData, SqlEmployeesData>();
 services.AddScoped<IProductData, SqlProductData>(); // !!! AddScoped !!!
-
-
 
 #endregion
 
