@@ -28,5 +28,7 @@ public class WebStoreDB : IdentityDbContext<User, Role, string>
         //   .HasMany(section => section.Products)
         //   .WithOne(product => product.Section)
         //   .OnDelete(DeleteBehavior.Cascade);
+
+        //db.Entity<Employee>().HasData()
     }
 }

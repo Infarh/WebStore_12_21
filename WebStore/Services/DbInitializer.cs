@@ -116,6 +116,8 @@ public class DbInitializer : IDbInitializer
         _Logger.LogInformation("Инициализация сотрудников...");
         await using var transaction = await _db.Database.BeginTransactionAsync(Cancel);
 
+        TestData.Employees.ForEach(employee => employee.Id = 0);
+
         await _db.Employees.AddRangeAsync(TestData.Employees, Cancel);
         await _db.SaveChangesAsync(Cancel);
 
