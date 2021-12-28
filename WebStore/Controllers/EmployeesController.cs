@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-using WebStore.Data;
-using WebStore.Models;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using WebStore.Domain.Entities;
 using WebStore.Services.Interfaces;
 using WebStore.ViewModels;
 
@@ -9,6 +8,7 @@ namespace WebStore.Controllers
 {
     //[Route("empl/[action]/{id?}")]
     //[Route("Staff/{action=Index}/{Id?}")]
+    //[Authorize]
     public class EmployeesController : Controller
     {
         private readonly IEmployeesData _EmployeesData;
@@ -42,8 +42,10 @@ namespace WebStore.Controllers
             return View(employee);
         }
 
+        //[Authorize(Roles = "Admin")]
         public IActionResult Create() => View("Edit", new EmployeeViewModel());
 
+        //[Authorize(Roles = "Admin")]
         public IActionResult Edit(int? id)
         {
             if (id is null)
@@ -69,10 +71,11 @@ namespace WebStore.Controllers
             return View(model);
         }
 
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Edit(EmployeeViewModel Model)
         {
-            if(Model.LastName == "Асама" && Model.Name == "Бин" && Model.Patronymic == "Ладен")
+            if (Model.LastName == "Асама" && Model.Name == "Бин" && Model.Patronymic == "Ладен")
                 ModelState.AddModelError("", "Террористов на работу не берём!");
 
             if (!ModelState.IsValid)
@@ -101,6 +104,7 @@ namespace WebStore.Controllers
             return RedirectToAction("Index");
         }
 
+        //[Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             if (id < 0)
@@ -122,6 +126,7 @@ namespace WebStore.Controllers
             return View(model);
         }
 
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult DeleteConfirmed(int id)
         {
