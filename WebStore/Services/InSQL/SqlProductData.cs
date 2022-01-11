@@ -1,4 +1,5 @@
-﻿using WebStore.DAL.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using WebStore.DAL.Context;
 using WebStore.Domain;
 using WebStore.Domain.Entities;
 using WebStore.Services.Interfaces;
@@ -27,4 +28,9 @@ public class SqlProductData : IProductData
 
         return query;
     }
+
+    public Product? GetProductById(int Id) => _db.Products
+       .Include(p => p.Brand)
+       .Include(p => p.Section)
+       .FirstOrDefault(p => p.Id == Id);
 }
