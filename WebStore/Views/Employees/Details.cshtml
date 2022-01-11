@@ -1,4 +1,5 @@
-﻿@model WebStore.Domain.Entities.Employee
+﻿@using WebStore.Domain.Entities.Identity
+@model WebStore.Domain.Entities.Employee
 
 @{
     ViewData["Title"] = "Информация о сотруднике id:" + Model.Id;
@@ -42,11 +43,14 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-default">
-        <i class="fa fa-edit"></i> Ред.
-    </a>
     <a asp-action="Index">Назад к списку</a>
-    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
-        <i class="fa fa-trash-o"></i> Удал.
-    </a>
+    @if (User.IsInRole(Role.Administrators))
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-default">
+            <i class="fa fa-edit"></i> Ред.
+        </a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+            <i class="fa fa-trash-o"></i> Удал.
+        </a>
+    }
 </div>
