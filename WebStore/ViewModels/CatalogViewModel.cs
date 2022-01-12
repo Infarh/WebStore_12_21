@@ -6,5 +6,5 @@ public class CatalogViewModel
 
     public int? SectionId { get; set; }
 
-    public IEnumerable<ProductViewModel> Products { get; set; } = null!;
+    public IEnumerable<ProductViewModel?> Products { get; set; } = null!;
 }

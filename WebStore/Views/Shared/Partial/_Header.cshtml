@@ -57,43 +57,7 @@
                     </div>
                 </div>
                 <div class="col-sm-8">
-                    <div class="shop-menu pull-right">
-                        <ul class="nav navbar-nav">
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-user"></i> @User.Identity!.Name
-                                    </a>
-                                </li>
-                            }
-                            <li><a href="#"><i class="fa fa-star"></i> Список желаний</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Оформить заказ</a></li>
-                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Корзина</a></li>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li>
-
-                                    <a asp-controller="Account" asp-action="Logout">
-                                        <i class="fa fa-sign-out"></i> Выход
-                                    </a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li>
-                                    <a asp-controller="Account" asp-action="Register">
-                                        <i class="fa fa-user"></i> Регистрация
-                                    </a>
-                                </li>
-                                <li>
-                                    <a asp-controller="Account" asp-action="Login">
-                                        <i class="fa fa-lock"></i> Вход
-                                    </a>
-                                </li>
-                            }
-                        </ul>
-                    </div>
+                    <vc:user-info/>
                 </div>
             </div>
         </div>

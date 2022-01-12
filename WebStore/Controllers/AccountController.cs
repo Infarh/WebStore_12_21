@@ -29,10 +29,12 @@ public class AccountController : Controller
             UserName = Model.UserName,
         };
 
-        var registration_result = await _UserManager.CreateAsync(user, Model.Password);
+        var registration_result = await _UserManager.CreateAsync(user, Model.Password).ConfigureAwait(true);
         if (registration_result.Succeeded)
         {
-            await _SignInManager.SignInAsync(user, false);
+            await _UserManager.AddToRoleAsync(user, Role.Users).ConfigureAwait(true);
+
+            await _SignInManager.SignInAsync(user, false).ConfigureAwait(true);
             return RedirectToAction("Index", "Home");
         }
 
@@ -54,7 +56,7 @@ public class AccountController : Controller
             Model.UserName,
             Model.Password,
             Model.RememberMe,
-            true);
+            true).ConfigureAwait(true);
 
         if (login_result.Succeeded)
         {
@@ -74,7 +76,7 @@ public class AccountController : Controller
 
     public async Task<IActionResult> Logout()
     {
-        await _SignInManager.SignOutAsync();
+        await _SignInManager.SignOutAsync().ConfigureAwait(true);
         return RedirectToAction("Index", "Home");
     }
 
