@@ -1,0 +1,44 @@
+﻿@model OrderViewModel
+
+<form asp-action="CheckOut" asp-antiforgery="true">
+    <div class="row">
+        <div class="col-sm-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Phone" class="sr-only"></label>
+                <input asp-for="Phone" class="form-control" placeholder="Телефон" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Address" class="sr-only"></label>
+                <input asp-for="Address" class="form-control" placeholder="Адрес" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="sr-only"></label>
+                <input asp-for="Description" class="form-control" placeholder="Описание" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            @{
+                ViewData.TryGetValue("TotalPrice", out var total_price);
+            }
+
+            @if (total_price is decimal price and > 0)
+            {
+                    <div class="total_area">
+                        <ul>
+                            <li>Стоимость доставки <span>Free</span></li>
+                            <li>Итого <span>@price</span></li>
+                        </ul>
+                        <a class="btn btn-default update" href="">Обновить</a>
+                        <input class="btn btn-default check_out" type="submit" value="Оформить заказ"/>
+                    </div>
+            }
+        </div>
+    </div>
+</form>

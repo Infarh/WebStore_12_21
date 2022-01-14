@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = $"Заказ {ViewBag.OrderId} подтверждён";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    
+    <p>Заказ @ViewBag.OrderId сформирован и в скором времени будет обработан</p>
+    
+    <a asp-controller="Home" asp-action="Index">На главную</a>
+</div>
