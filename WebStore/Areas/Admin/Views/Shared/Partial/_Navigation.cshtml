@@ -6,12 +6,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                 <img src="~/Admin/img/logo.png" />
             </a>
         </div>
         <span class="logout-spn" >
-            <a href="#" style="color:#fff;">LOGOUT</a>  
+            <a asp-area="" asp-controller="Home" asp-action="Index" style="color:#fff;">LOGOUT</a>  
         </span>
     </div>
 </div>
@@ -22,31 +22,15 @@
         <ul class="nav" id="main-menu">
 
             <li class="active-link">
-                <a href="index.html" ><i class="fa fa-desktop "></i>Dashboard <span class="badge">Included</span></a>
+                <a asp-controller="Home" asp-action="Index">
+                    <i class="fa fa-desktop "></i>Управление <span class="badge">Included</span>
+                </a>
             </li>
 
             <li>
-                <a href="ui.html"><i class="fa fa-table "></i>UI Elements  <span class="badge">Included</span></a>
-            </li>
-            <li>
-                <a href="blank.html"><i class="fa fa-edit "></i>Blank Page  <span class="badge">Included</span></a>
-            </li>
-
-            <li>
-                <a href="#"><i class="fa fa-qrcode "></i>My Link One</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-bar-chart-o"></i>My Link Two</a>
-            </li>
-
-            <li>
-                <a href="#"><i class="fa fa-edit "></i>My Link Three </a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-table "></i>My Link Four</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-edit "></i>My Link Five </a>
+                <a href="ui.html">
+                    <i class="fa fa-table "></i>UI Elements <span class="badge">Included</span>
+                </a>
             </li>
         </ul>
     </div>
