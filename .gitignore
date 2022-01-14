@@ -365,3 +365,4 @@ FodyWeavers.xsd
 **/wwwroot/lib
 **/wwwroot/js/site.*
 **/wwwroot/css/site.*
+*.db
