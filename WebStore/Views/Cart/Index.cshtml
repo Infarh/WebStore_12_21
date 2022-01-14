@@ -1,4 +1,4 @@
-﻿@model CartViewModel
+﻿@model CartOrderViewModel
 @{
     ViewBag.Title = "Корзина";
 }
@@ -24,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var (product, quantity) in Model.Items)
+                    @foreach (var (product, quantity) in Model.Cart.Items)
                     {
                         <tr>
                             <td class="cart_product">
@@ -123,7 +123,7 @@
                 <div class="total_area">
                     <ul>
                         <li>Стоимость доставки <span>Free</span></li>
-                        <li>Итого <span>@Model.TotalPrice</span></li>
+                        <li>Итого <span>@Model.Cart.TotalPrice</span></li>
                     </ul>
                         <a class="btn btn-default update" href="">Обновить</a>
                         <a class="btn btn-default check_out" href="">Оформить заказ</a>
