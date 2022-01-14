@@ -1,0 +1,39 @@
+﻿<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="adjust-nav">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/Admin/img/logo.png" />
+            </a>
+        </div>
+        <span class="logout-spn" >
+            <a asp-area="" asp-controller="Home" asp-action="Index" style="color:#fff;">LOGOUT</a>  
+        </span>
+    </div>
+</div>
+
+<!-- /. NAV TOP  -->
+<nav class="navbar-default navbar-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="main-menu">
+
+            <li class="active-link">
+                <a asp-controller="Home" asp-action="Index">
+                    <i class="fa fa-desktop "></i>Управление <span class="badge">Included</span>
+                </a>
+            </li>
+
+            <li>
+                <a asp-controller="Products" asp-action="Index">
+                    <i class="fa fa-table "></i>Товары <span class="badge">Included</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+<!-- /. NAV SIDE  -->

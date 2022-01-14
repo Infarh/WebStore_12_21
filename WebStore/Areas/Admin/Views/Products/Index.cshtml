@@ -1,0 +1,42 @@
+﻿@model IEnumerable<WebStore.Domain.Entities.Product>
+@{
+    ViewBag.Title = "Каталог товаров";
+}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th></th>
+        <th>@Html.DisplayNameFor(m => m.Id)</th>
+        <th>@Html.DisplayNameFor(m => m.Name)</th>
+        <th>@Html.DisplayNameFor(m => m.Brand)</th>
+        <th>@Html.DisplayNameFor(m => m.Section)</th>
+        <th>@Html.DisplayNameFor(m => m.ImageUrl)</th>
+        <th>@Html.DisplayNameFor(m => m.Price)</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model!)
+        {
+            var brand = product.Brand?.Name;
+
+            <tr>
+                <td>
+                    <a>Edit</a>
+                </td>
+                <td>@Html.DisplayFor(_ => product.Id)</td>
+                <td>@Html.DisplayFor(_ => product.Name)</td>
+                <td>@Html.DisplayFor(_ => brand)</td>
+                <td>@Html.DisplayFor(_ => product.Section.Name)</td>
+                <td>
+                    <img src="~/images/shop/@product.ImageUrl" width="50" alt="@product.Name"/>
+                </td>
+                <td>@Html.DisplayFor(_ => product.Price)</td>
+                <td>
+                    <a>Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

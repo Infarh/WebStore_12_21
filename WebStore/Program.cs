@@ -68,6 +68,7 @@ services.ConfigureApplicationCookie(opt =>
 
 services.AddScoped<IEmployeesData, SqlEmployeesData>();
 services.AddScoped<IProductData, SqlProductData>(); // !!! AddScoped !!!
+services.AddScoped<IOrderService, SqlOrderService>();
 services.AddScoped<ICartService, InCookiesCartService>();
 
 #endregion
@@ -77,7 +78,7 @@ var app = builder.Build(); // Сборка приложения
 await using (var scope = app.Services.CreateAsyncScope())
 {
     var db_initializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
-    await db_initializer.InitializeAsync(RemoveBefore: false);
+    await db_initializer.InitializeAsync(RemoveBefore: false).ConfigureAwait(true);
 }
 
 //app.Urls.Add("http://+:80"); // - если хочется обеспечить видимость приложения в локальной сети
@@ -102,10 +103,17 @@ app.UseMiddleware<TestMiddleware>();
 
 app.UseWelcomePage("/welcome");
 
-//app.MapDefaultControllerRoute();
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}"); 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "areas",
+        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
 
 #endregion
 
