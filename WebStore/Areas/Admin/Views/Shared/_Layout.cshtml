@@ -1,13 +1,27 @@
 ﻿<!DOCTYPE html>
-
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Responsive Admin</title>
+    
+    <partial name="Partial/_Styles"/>
+    
+    @await RenderSectionAsync("Styles", false)
 </head>
 <body>
-    <div>
-        @RenderBody()
+    <div id="wrapper">
+        <partial name="Partial/_Navigation"/>
+
+        <div id="page-wrapper" >
+            @RenderBody()
+        </div>
     </div>
+
+    <partial name="Partial/_Footer"/>
+
+    <partial name="Partial/_Scripts"/>
+    
+    @await RenderSectionAsync("Scripts", false)
 </body>
 </html>
