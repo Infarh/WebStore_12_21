@@ -68,6 +68,7 @@ services.ConfigureApplicationCookie(opt =>
 
 services.AddScoped<IEmployeesData, SqlEmployeesData>();
 services.AddScoped<IProductData, SqlProductData>(); // !!! AddScoped !!!
+services.AddScoped<IOrderService, SqlOrderService>();
 services.AddScoped<ICartService, InCookiesCartService>();
 
 #endregion
