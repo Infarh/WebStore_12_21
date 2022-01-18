@@ -1,4 +1,4 @@
-﻿namespace WebStore.Services.Interfaces;
+﻿namespace WebStore.Interfaces.Services;
 
 public interface IDbInitializer
 {
