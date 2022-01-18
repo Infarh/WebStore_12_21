@@ -1,4 +1,5 @@
-﻿using WebStore.Interfaces.TestAPI;
+﻿using System.Net.Http.Json;
+using WebStore.Interfaces.TestAPI;
 using WebStore.WebAPI.Clients.Base;
 
 namespace WebStore.WebAPI.Clients.Values;
@@ -10,15 +11,48 @@ public class ValuesClient : BaseClient, IValuesService
         
     }
 
-    public IEnumerable<string> GetValues() { throw new NotImplementedException(); }
+    public IEnumerable<string> GetValues()
+    {
+        var response = Http.GetAsync(Address).Result;
+        if (response.IsSuccessStatusCode)
+            return response.Content.ReadFromJsonAsync<IEnumerable<string>>().Result!;
 
-    public int Count() { throw new NotImplementedException(); }
+        return Enumerable.Empty<string>();
+    }
 
-    public string GetById(int Id) { throw new NotImplementedException(); }
+    public int Count()
+    {
+        var response = Http.GetAsync($"{Address}/count").Result;
+        if (response.IsSuccessStatusCode)
+            return response.Content.ReadFromJsonAsync<int>().Result!;
 
-    public void Add(string Value) { throw new NotImplementedException(); }
+        return -1;
+    }
 
-    public void Edit(int Id, string Value) { throw new NotImplementedException(); }
+    public string? GetById(int Id)
+    {
+        var response = Http.GetAsync($"{Address}/{Id}").Result;
+        if (response.IsSuccessStatusCode)
+            return response.Content.ReadFromJsonAsync<string>().Result!;
 
-    public bool Delete(int Id) { throw new NotImplementedException(); }
+        return null;
+    }
+
+    public void Add(string Value)
+    {
+        var response = Http.PostAsJsonAsync(Address, Value).Result;
+        response.EnsureSuccessStatusCode();
+    }
+
+    public void Edit(int Id, string Value)
+    {
+        var response = Http.PutAsJsonAsync($"{Address}/{Id}", Value).Result;
+        response.EnsureSuccessStatusCode();
+    }
+
+    public bool Delete(int Id)
+    {
+        var response = Http.DeleteAsync($"{Address}/{Id}").Result;
+        return response.IsSuccessStatusCode;
+    }
 }

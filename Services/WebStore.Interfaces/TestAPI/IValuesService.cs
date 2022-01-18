@@ -6,7 +6,7 @@ public interface IValuesService
 
     int Count();
 
-    string GetById(int Id);
+    string? GetById(int Id);
 
     void Add(string Value);
 
