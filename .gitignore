@@ -366,3 +366,4 @@ FodyWeavers.xsd
 **/wwwroot/js/site.*
 **/wwwroot/css/site.*
 *.db
+*.db*
