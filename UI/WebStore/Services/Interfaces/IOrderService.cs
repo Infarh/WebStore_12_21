@@ -1,5 +1,5 @@
 ﻿using WebStore.Domain.Entities.Orders;
-using WebStore.ViewModels;
+using WebStore.Domain.ViewModels;
 
 namespace WebStore.Services.Interfaces;
 
