@@ -15,39 +15,39 @@ public class ProductsClient : BaseClient, IProductData
 
     public IEnumerable<Section> GetSections()
     {
-        var sections = Get<IEnumerable<Section>>($"{Address}/sections");
-        return sections!;
+        var sections = Get<IEnumerable<SectionDTO>>($"{Address}/sections");
+        return sections!.FromDTO()!;
     }
 
     public Section? GetSectionById(int Id)
     {
-        var section = Get<Section>($"{Address}/sections/{Id}");
-        return section;
+        var section = Get<SectionDTO>($"{Address}/sections/{Id}");
+        return section.FromDTO();
     }
 
     public IEnumerable<Brand> GetBrands()
     {
-        var brands = Get<IEnumerable<Brand>>($"{Address}/brands");
-        return brands!;
+        var brands = Get<IEnumerable<BrandDTO>>($"{Address}/brands");
+        return brands!.FromDTO()!;
     }
 
     public Brand? GetBrandById(int Id)
     {
-        var brand = Get<Brand>($"{Address}/brands/{Id}");
-        return brand;
+        var brand = Get<BrandDTO>($"{Address}/brands/{Id}");
+        return brand.FromDTO();
     }
 
     public IEnumerable<Product> GetProducts(ProductFilter? Filter = null)
     {
         var response = Post(Address, Filter ?? new());
-        var products = response.Content.ReadFromJsonAsync<IEnumerable<Product>>().Result;
-        return products!;
+        var products = response.Content.ReadFromJsonAsync<IEnumerable<ProductDTO>>().Result;
+        return products!.FromDTO()!;
     }
 
     public Product? GetProductById(int Id)
     {
-        var product = Get<Product>($"{Address}/{Id}");
-        return product;
+        var product = Get<ProductDTO>($"{Address}/{Id}");
+        return product.FromDTO();
     }
 
     public Product CreateProduct(string Name, int Order, decimal Price, string ImageUrl, string Section, string? Brand = null)
@@ -62,7 +62,7 @@ public class ProductsClient : BaseClient, IProductData
             Brand = Brand,
         });
 
-        var product = response.Content.ReadFromJsonAsync<Product>().Result;
-        return product!;
+        var product = response.Content.ReadFromJsonAsync<ProductDTO>().Result;
+        return product!.FromDTO()!;
     }
 }
