@@ -19,17 +19,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.DAL.Sqlite", "Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore", "UI\WebStore\WebStore.csproj", "{BFCEAA82-5021-4C86-975A-DB50F489BC28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.Interfaces", "Services\WebStore.Interfaces\WebStore.Interfaces.csproj", "{18F7E24D-789D-4C06-93A9-CF6DBBBE7055}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Interfaces", "Services\WebStore.Interfaces\WebStore.Interfaces.csproj", "{18F7E24D-789D-4C06-93A9-CF6DBBBE7055}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.Services", "Services\WebStore.Services\WebStore.Services.csproj", "{E0D54E94-4992-4B5C-8C1B-AF2CBEF46628}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.Services", "Services\WebStore.Services\WebStore.Services.csproj", "{E0D54E94-4992-4B5C-8C1B-AF2CBEF46628}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B4B06C92-926B-4E6B-AF8E-7B17EE619FEA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsole", "Tests\TestConsole\TestConsole.csproj", "{EA3FA324-01B8-4F5A-A1E7-7DE3064D992B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.WebAPI", "Services\WebStore.WebAPI\WebStore.WebAPI.csproj", "{22513812-9034-478E-8066-6B5CA8F41A02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.WebAPI", "Services\WebStore.WebAPI\WebStore.WebAPI.csproj", "{22513812-9034-478E-8066-6B5CA8F41A02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.WebAPI.Clients", "Services\WebStore.WebAPI.Clients\WebStore.WebAPI.Clients.csproj", "{7123FCBB-D9B4-4864-9A2B-5C7001D0629C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebStore.WebAPI.Clients", "Services\WebStore.WebAPI.Clients\WebStore.WebAPI.Clients.csproj", "{7123FCBB-D9B4-4864-9A2B-5C7001D0629C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.WPF", "UI\WebStore.WPF\WebStore.WPF.csproj", "{8BB59E53-0CF5-4532-9132-4AACFB235DC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,10 @@ Global
 		{7123FCBB-D9B4-4864-9A2B-5C7001D0629C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7123FCBB-D9B4-4864-9A2B-5C7001D0629C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7123FCBB-D9B4-4864-9A2B-5C7001D0629C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB59E53-0CF5-4532-9132-4AACFB235DC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB59E53-0CF5-4532-9132-4AACFB235DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB59E53-0CF5-4532-9132-4AACFB235DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB59E53-0CF5-4532-9132-4AACFB235DC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{EA3FA324-01B8-4F5A-A1E7-7DE3064D992B} = {B4B06C92-926B-4E6B-AF8E-7B17EE619FEA}
 		{22513812-9034-478E-8066-6B5CA8F41A02} = {BB938B5B-E8EC-4732-B776-E4A15D1CEC75}
 		{7123FCBB-D9B4-4864-9A2B-5C7001D0629C} = {BB938B5B-E8EC-4732-B776-E4A15D1CEC75}
+		{8BB59E53-0CF5-4532-9132-4AACFB235DC3} = {1F1298B5-BE78-4EB0-81B7-8711E6ACA56D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CEC6067F-60E1-41EE-A9BF-D69D58C6CA35}
