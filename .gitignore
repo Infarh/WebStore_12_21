@@ -367,3 +367,5 @@ FodyWeavers.xsd
 **/wwwroot/css/site.*
 *.db
 *.db*
+/Services/WebStore.WebAPI/WebStore.WebAPI.xml
+/Common/WebStore.Domain/WebStore.Domain.xml

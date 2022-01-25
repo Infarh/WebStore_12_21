@@ -1,18 +1,17 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Infrastructure.Conventions;
 using WebStore.Infrastructure.Middleware;
 using WebStore.Interfaces.Services;
 using WebStore.Interfaces.TestAPI;
-using WebStore.Services;
 using WebStore.Services.Services;
 using WebStore.Services.Services.InCookies;
-using WebStore.Services.Services.InSQL;
 using WebStore.WebAPI.Clients.Employees;
+using WebStore.WebAPI.Clients.Identity;
 using WebStore.WebAPI.Clients.Orders;
 using WebStore.WebAPI.Clients.Products;
 using WebStore.WebAPI.Clients.Values;
@@ -21,6 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 #region Настройка построителя приложения - определение содержимого
 
+var configuration = builder.Configuration;
 var services = builder.Services;
 services.AddControllersWithViews(opt =>
 {
@@ -47,8 +47,19 @@ switch (database_type)
 services.AddTransient<IDbInitializer, DbInitializer>();
 
 services.AddIdentity<User, Role>()
-   .AddEntityFrameworkStores<WebStoreDB>()
+   //.AddEntityFrameworkStores<WebStoreDB>()
    .AddDefaultTokenProviders();
+
+services.AddHttpClient("WebStoreAPIIdentity", client => client.BaseAddress = new(configuration["WebAPI"]))
+   .AddTypedClient<IUserStore<User>, UsersClient>()
+   .AddTypedClient<IUserRoleStore<User>, UsersClient>()
+   .AddTypedClient<IUserPasswordStore<User>, UsersClient>()
+   .AddTypedClient<IUserEmailStore<User>, UsersClient>()
+   .AddTypedClient<IUserPhoneNumberStore<User>, UsersClient>()
+   .AddTypedClient<IUserTwoFactorStore<User>, UsersClient>()
+   .AddTypedClient<IUserClaimStore<User>, UsersClient>()
+   .AddTypedClient<IUserLoginStore<User>, UsersClient>()
+   .AddTypedClient<IRoleStore<Role>, RolesClient>();
 
 services.Configure<IdentityOptions>(opt =>
 {
@@ -92,7 +103,6 @@ services.ConfigureApplicationCookie(opt =>
 //services.AddScoped<IOrderService, SqlOrderService>();
 services.AddScoped<ICartService, InCookiesCartService>();
 
-var configuration = builder.Configuration;
 //services.AddHttpClient<IValuesService, ValuesClient>(client => client.BaseAddress = new(configuration["WebAPI"]));
 //services.AddHttpClient<IEmployeesData, EmployeesClient>(client => client.BaseAddress = new(configuration["WebAPI"]));
 //services.AddHttpClient<IProductData, ProductsClient>(client => client.BaseAddress = new(configuration["WebAPI"]));
@@ -103,6 +113,9 @@ services.AddHttpClient("WebStoreAPI", client => client.BaseAddress = new(configu
    .AddTypedClient<IEmployeesData, EmployeesClient>()
    .AddTypedClient<IProductData, ProductsClient>()
    .AddTypedClient<IOrderService, OrdersClient>();
+
+//services.AddAutoMapper(typeof(Program));
+services.AddAutoMapper(Assembly.GetEntryAssembly());
 
 #endregion
 

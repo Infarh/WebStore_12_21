@@ -6,6 +6,7 @@ namespace WebStore.Domain.Entities.Base;
 
 public abstract class Entity : IEntity
 {
+    /// <summary>Идентификатор</summary>
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
