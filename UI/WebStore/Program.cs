@@ -1,5 +1,7 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Infrastructure.Conventions;
@@ -111,6 +113,9 @@ services.AddHttpClient("WebStoreAPI", client => client.BaseAddress = new(configu
    .AddTypedClient<IEmployeesData, EmployeesClient>()
    .AddTypedClient<IProductData, ProductsClient>()
    .AddTypedClient<IOrderService, OrdersClient>();
+
+//services.AddAutoMapper(typeof(Program));
+services.AddAutoMapper(Assembly.GetEntryAssembly());
 
 #endregion
 
