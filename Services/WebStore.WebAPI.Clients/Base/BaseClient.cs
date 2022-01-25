@@ -15,34 +15,34 @@ public abstract class BaseClient : IDisposable
     }
 
     protected T? Get<T>(string url) => GetAsync<T>(url).Result;
-    protected async Task<T?> GetAsync<T>(string url)
+    protected async Task<T?> GetAsync<T>(string url, CancellationToken Cancel = default)
     {
-        var response = await Http.GetAsync(url).ConfigureAwait(false);
+        var response = await Http.GetAsync(url, Cancel).ConfigureAwait(false);
         return await response
            .EnsureSuccessStatusCode()
            .Content
-           .ReadFromJsonAsync<T>()
+           .ReadFromJsonAsync<T>(cancellationToken: Cancel)
            .ConfigureAwait(false);
     }
 
     protected HttpResponseMessage Post<T>(string url, T value) => PostAsync<T>(url, value).Result;
-    protected async Task<HttpResponseMessage> PostAsync<T>(string url, T value)
+    protected async Task<HttpResponseMessage> PostAsync<T>(string url, T value, CancellationToken Cancel = default)
     {
-        var response = await Http.PostAsJsonAsync(url, value).ConfigureAwait(false);
+        var response = await Http.PostAsJsonAsync(url, value, Cancel).ConfigureAwait(false);
         return response.EnsureSuccessStatusCode();
     }
 
     protected HttpResponseMessage Put<T>(string url, T value) => PutAsync<T>(url, value).Result;
-    protected async Task<HttpResponseMessage> PutAsync<T>(string url, T value)
+    protected async Task<HttpResponseMessage> PutAsync<T>(string url, T value, CancellationToken Cancel = default)
     {
-        var response = await Http.PutAsJsonAsync(url, value).ConfigureAwait(false);
+        var response = await Http.PutAsJsonAsync(url, value, Cancel).ConfigureAwait(false);
         return response.EnsureSuccessStatusCode();
     }
 
     protected HttpResponseMessage Delete(string url) => DeleteAsync(url).Result;
-    protected async Task<HttpResponseMessage> DeleteAsync(string url)
+    protected async Task<HttpResponseMessage> DeleteAsync(string url, CancellationToken Cancel = default)
     {
-        var response = await Http.DeleteAsync(url).ConfigureAwait(false);
+        var response = await Http.DeleteAsync(url, Cancel).ConfigureAwait(false);
         return response;
     }
 
