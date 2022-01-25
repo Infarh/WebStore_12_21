@@ -13,7 +13,22 @@ var services = builder.Services;
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
-services.AddSwaggerGen();
+services.AddSwaggerGen(opt =>
+{
+    const string webstore_api_xml = "WebStore.WebAPI.xml";
+    const string webstore_domain_xml = "WebStore.Domain.xml";
+    const string debug_path = "bin/Debug/net6.0";
+
+    if (File.Exists(webstore_api_xml))
+        opt.IncludeXmlComments(webstore_api_xml);
+    else if (File.Exists(Path.Combine(debug_path, webstore_api_xml)))
+        opt.IncludeXmlComments(Path.Combine(debug_path, webstore_api_xml));
+
+    if (File.Exists(webstore_domain_xml))
+        opt.IncludeXmlComments(webstore_domain_xml);
+    else if (File.Exists(Path.Combine(debug_path, webstore_domain_xml)))
+        opt.IncludeXmlComments(Path.Combine(debug_path, webstore_domain_xml));
+});
 
 var database_type = builder.Configuration["Database"];
 switch (database_type)
