@@ -2,6 +2,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging.Debug;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Infrastructure.Conventions;
@@ -17,6 +18,13 @@ using WebStore.WebAPI.Clients.Products;
 using WebStore.WebAPI.Clients.Values;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//builder.Logging
+    //.ClearProviders()
+   //.AddConsole(opt => opt.LogToStandardErrorThreshold = LogLevel.Information)
+   //.AddFilter("Microsoft", level => level >= LogLevel.Information)
+   //.AddFilter<DebugLoggerProvider>((category, level) => category.StartsWith("Microsoft") && level > LogLevel.Debug)
+   //;
 
 #region Настройка построителя приложения - определение содержимого
 

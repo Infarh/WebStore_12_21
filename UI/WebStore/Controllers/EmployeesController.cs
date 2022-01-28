@@ -140,7 +140,10 @@ namespace WebStore.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             if (!_EmployeesData.Delete(id))
+            {
+                _Logger.LogWarning("Для операции удаления сотрудник с id:{0} не найден", id);
                 return NotFound();
+            }
 
             _Logger.LogInformation("Сотрудник с id:{0} удалён", id);
 
