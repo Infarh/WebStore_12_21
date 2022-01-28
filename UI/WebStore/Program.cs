@@ -9,6 +9,7 @@ using WebStore.Infrastructure.Conventions;
 using WebStore.Infrastructure.Middleware;
 using WebStore.Interfaces.Services;
 using WebStore.Interfaces.TestAPI;
+using WebStore.Logging;
 using WebStore.Services.Services;
 using WebStore.Services.Services.InCookies;
 using WebStore.WebAPI.Clients.Employees;
@@ -26,6 +27,7 @@ var builder = WebApplication.CreateBuilder(args);
 //.AddFilter<DebugLoggerProvider>((category, level) => category.StartsWith("Microsoft") && level > LogLevel.Debug)
 //;
 
+builder.Logging.AddLog4Net();
 
 #region Настройка построителя приложения - определение содержимого
 

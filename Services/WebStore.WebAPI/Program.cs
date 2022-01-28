@@ -4,10 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Interfaces.Services;
+using WebStore.Logging;
 using WebStore.Services.Services;
 using WebStore.Services.Services.InSQL;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Logging.AddLog4Net();
 
 var services = builder.Services;
 
