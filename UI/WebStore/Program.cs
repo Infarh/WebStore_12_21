@@ -20,11 +20,12 @@ using WebStore.WebAPI.Clients.Values;
 var builder = WebApplication.CreateBuilder(args);
 
 //builder.Logging
-    //.ClearProviders()
-   //.AddConsole(opt => opt.LogToStandardErrorThreshold = LogLevel.Information)
-   //.AddFilter("Microsoft", level => level >= LogLevel.Information)
-   //.AddFilter<DebugLoggerProvider>((category, level) => category.StartsWith("Microsoft") && level > LogLevel.Debug)
-   //;
+//.ClearProviders()
+//.AddConsole(opt => opt.LogToStandardErrorThreshold = LogLevel.Information)
+//.AddFilter("Microsoft", level => level >= LogLevel.Information)
+//.AddFilter<DebugLoggerProvider>((category, level) => category.StartsWith("Microsoft") && level > LogLevel.Debug)
+//;
+
 
 #region Настройка построителя приложения - определение содержимого
 
