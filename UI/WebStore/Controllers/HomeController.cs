@@ -19,7 +19,7 @@ public class HomeController : Controller
 
     public string ConfiguredAction(string id, string Value1)
     {
-        return $"Hello World! {id} - {Value1}";
+        return $"Hello World! {id} + {Value1}";
     }
 
     public void Throw(string Message) => throw new ApplicationException(Message);
