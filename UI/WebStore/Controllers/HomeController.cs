@@ -25,4 +25,16 @@ public class HomeController : Controller
     public void Throw(string Message) => throw new ApplicationException(Message);
 
     public IActionResult Error404() => View();
+
+    public IActionResult Status(string Code)
+    {
+        switch (Code)
+        {
+            default:
+                return Content($"Status code - {Code}");
+
+            case "404":
+                return RedirectToAction(nameof(Error404));
+        }
+    }
 }
