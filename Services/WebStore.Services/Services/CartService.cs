@@ -24,7 +24,7 @@ public class CartService : ICartService
         if (item is null)
             cart.Items.Add(new CartItem { ProductId = Id, Quantity = 1 });
         else
-            item.Quantity += 2;
+            item.Quantity++;
 
         _CartStore.Cart = cart;
     }

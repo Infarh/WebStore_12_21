@@ -11,8 +11,7 @@ public class WebAPIController : Controller
 
     public IActionResult Index()
     {
-        //var values = _ValuesService.GetValues();
-        //return View(values);
-        return View(Enumerable.Empty<string>());
+        var values = _ValuesService.GetValues();
+        return View(values);
     }
 }
