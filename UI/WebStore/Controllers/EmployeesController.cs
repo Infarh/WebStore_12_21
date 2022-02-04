@@ -10,7 +10,7 @@ namespace WebStore.Controllers
 {
     //[Route("empl/[action]/{id?}")]
     //[Route("Staff/{action=Index}/{Id?}")]
-    //[Authorize]
+    [Authorize]
     public class EmployeesController : Controller
     {
         private readonly IEmployeesData _EmployeesData;

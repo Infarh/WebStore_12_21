@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.ViewModels;
 using WebStore.Interfaces.Services;
 
 namespace WebStore.Controllers;
 
+[Authorize]
 public class UserProfileController : Controller
 {
     public IActionResult Index() => View();
