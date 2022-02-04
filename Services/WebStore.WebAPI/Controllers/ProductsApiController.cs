@@ -56,9 +56,9 @@ public class ProductsApiController : ControllerBase
     }
 
     [HttpGet("{Id}")]
-    public IActionResult GetProductGyId(int Id)
+    public IActionResult GetProductById(int Id)
     {
-        var product = _ProductData.GetSectionById(Id);
+        var product = _ProductData.GetProductById(Id);
         if (product is null)
             return NotFound();
 
@@ -69,6 +69,6 @@ public class ProductsApiController : ControllerBase
     public IActionResult CreateProduct(CreateProductDTO Model)
 {
         var product = _ProductData.CreateProduct(Model.Name, Model.Order, Model.Price, Model.ImageUrl, Model.Section, Model.Brand);
-        return CreatedAtAction(nameof(GetProductGyId), new { product.Id }, product.ToDTO());
+        return CreatedAtAction(nameof(GetProductById), new { product.Id }, product.ToDTO());
     }
 }
