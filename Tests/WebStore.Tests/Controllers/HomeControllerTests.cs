@@ -23,7 +23,7 @@ public class HomeControllerTests
     {
         var product_data_mock = new Mock<IProductData>();
         product_data_mock.Setup(s => s.GetProducts(It.IsAny<ProductFilter>()))
-           .Returns<ProductFilter>(f => Enumerable.Empty<Product>());
+           .Returns<ProductFilter>(f => new ProductsPage(Enumerable.Empty<Product>(), 0));
 
         var controller = new HomeController();
 

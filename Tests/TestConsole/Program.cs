@@ -18,7 +18,7 @@ var product_data = provider.GetRequiredService<IProductData>();
 
 var products = product_data.GetProducts();
 
-foreach (var product in products)
+foreach (var product in products.Products)
 {
     Console.WriteLine("[{0,4}] {1} {2} {3}", 
         product.Id, product.Name, product.Price, product.ImageUrl);

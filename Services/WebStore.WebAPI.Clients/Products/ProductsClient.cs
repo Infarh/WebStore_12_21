@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+
 using WebStore.Domain;
 using WebStore.Domain.DTO;
 using WebStore.Domain.Entities;
@@ -14,10 +15,22 @@ public class ProductsClient : BaseClient, IProductData
     {
     }
 
-    public IEnumerable<Section> GetSections()
+    public IEnumerable<Section> GetSections(int Skip = 0, int? Take = null)
     {
-        var sections = Get<IEnumerable<SectionDTO>>($"{Address}/sections");
+        IEnumerable<SectionDTO>? sections;
+
+        if (Skip > 0 && Take > 0)
+            sections = Get<IEnumerable<SectionDTO>>($"{Address}/sections({Skip}-{Take})");
+        else
+            sections = Get<IEnumerable<SectionDTO>>($"{Address}/sections");
+
         return sections!.FromDTO()!;
+    }
+
+    public int GetSectionsCount()
+    {
+        var count = Get<int>($"{Address}/sections/count");
+        return count;
     }
 
     public Section? GetSectionById(int Id)
@@ -26,10 +39,21 @@ public class ProductsClient : BaseClient, IProductData
         return section.FromDTO();
     }
 
-    public IEnumerable<Brand> GetBrands()
+    public IEnumerable<Brand> GetBrands(int Skip = 0, int? Take = null)
     {
-        var brands = Get<IEnumerable<BrandDTO>>($"{Address}/brands");
+        IEnumerable<BrandDTO>? brands;
+        if (Skip > 0 && Take > 0)
+            brands = Get<IEnumerable<BrandDTO>>($"{Address}/brands({Skip}-{Take})");
+        else
+            brands = Get<IEnumerable<BrandDTO>>($"{Address}/brands");
+
         return brands!.FromDTO()!;
+    }
+
+    public int GetBrandsCount()
+    {
+        var count = Get<int>($"{Address}/brands/count");
+        return count;
     }
 
     public Brand? GetBrandById(int Id)
@@ -38,10 +62,10 @@ public class ProductsClient : BaseClient, IProductData
         return brand.FromDTO();
     }
 
-    public IEnumerable<Product> GetProducts(ProductFilter? Filter = null)
+    public ProductsPage GetProducts(ProductFilter? Filter = null)
     {
         var response = Post(Address, Filter ?? new());
-        var products = response.Content.ReadFromJsonAsync<IEnumerable<ProductDTO>>().Result;
+        var products = response.Content.ReadFromJsonAsync<ProductsPageDTO>().Result;
         return products!.FromDTO()!;
     }
 
