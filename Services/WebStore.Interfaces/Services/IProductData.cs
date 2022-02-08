@@ -5,11 +5,15 @@ namespace WebStore.Interfaces.Services;
 
 public interface IProductData
 {
-    IEnumerable<Section> GetSections();
+    IEnumerable<Section> GetSections(int Skip = 0, int? Take = null);
+
+    int GetSectionsCount();
 
     Section? GetSectionById(int Id);
 
-    IEnumerable<Brand> GetBrands();
+    IEnumerable<Brand> GetBrands(int Skip = 0, int? Take = null);
+
+    int GetBrandsCount();
 
     Brand? GetBrandById(int Id);
 

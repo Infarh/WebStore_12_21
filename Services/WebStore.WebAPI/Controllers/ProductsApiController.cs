@@ -21,6 +21,13 @@ public class ProductsApiController : ControllerBase
         return Ok(sections.ToDTO());
     }
 
+    [HttpGet("sections({Skip}-{Take}")] // GET -> http://localhost:5001/api/products/sections(5-7)
+    public IActionResult GetSections(int Skip, int Take)
+    {
+        var sections = _ProductData.GetSections(Skip, Take);
+        return Ok(sections.ToDTO());
+    }
+
     [HttpGet("sections/{Id}")] // GET -> http://localhost:5001/api/products/sections/5
     public IActionResult GetSectionById(int Id)
     {
@@ -31,8 +38,22 @@ public class ProductsApiController : ControllerBase
         return Ok(section.ToDTO());
     }
 
+    [HttpGet("sections/count")]
+    public IActionResult GetSectionsCount()
+    {
+        var count = _ProductData.GetSectionsCount();
+        return Ok(count);
+    }
+
     [HttpGet("brands")] // GET -> http://localhost:5001/api/products/brands
     public IActionResult GetBrands()
+    {
+        var brands = _ProductData.GetBrands();
+        return Ok(brands.ToDTO());
+    }
+
+    [HttpGet("brands({Skip}-{Take}")] // GET -> http://localhost:5001/api/products/brands(5-7)
+    public IActionResult GetBrands(int Skip, int Take)
     {
         var brands = _ProductData.GetBrands();
         return Ok(brands.ToDTO());
@@ -46,6 +67,13 @@ public class ProductsApiController : ControllerBase
             return NotFound();
 
         return Ok(brand.ToDTO());
+    }
+
+    [HttpGet("brands/count")]
+    public IActionResult GetBrandsCount()
+    {
+        var count = _ProductData.GetBrandsCount();
+        return Ok(count);
     }
 
     [HttpPost]

@@ -12,16 +12,33 @@ public class SqlProductData : IProductData
 
     public SqlProductData(WebStoreDB db) => _db = db;
 
-    public IEnumerable<Section> GetSections() => _db.Sections;
+    public IEnumerable<Section> GetSections(int Skip = 0, int? Take = null)
+    {
+        IQueryable<Section> query = _db.Sections;
+        if (Skip > 0) query = query.Skip(Skip);
+        if (Take > 0) query = query.Take((int)Take);
+        return query.AsEnumerable();
+    }
+
     public Section? GetSectionById(int Id) => _db.Sections
        .Include(s => s.Products)
        .FirstOrDefault(s => s.Id == Id);
 
-    public IEnumerable<Brand> GetBrands() => _db.Brands;
+    public int GetSectionsCount() => _db.Sections.Count();
+
+    public IEnumerable<Brand> GetBrands(int Skip = 0, int? Take = null)
+    {
+        IQueryable<Brand> query = _db.Brands;
+        if (Skip > 0) query = query.Skip(Skip);
+        if (Take > 0) query = query.Take((int)Take);
+        return query.AsEnumerable();
+    }
 
     public Brand? GetBrandById(int Id) => _db.Brands
        .Include(b => b.Products)
        .FirstOrDefault(b => b.Id == Id);
+
+    public int GetBrandsCount() => _db.Brands.Count();
 
     public ProductsPage GetProducts(ProductFilter? Filter = null)
     {
