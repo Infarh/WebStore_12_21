@@ -30,14 +30,14 @@
 
             @if (total_price is decimal price and > 0)
             {
-                    <div class="total_area">
-                        <ul>
-                            <li>Стоимость доставки <span>Free</span></li>
-                            <li>Итого <span>@price</span></li>
-                        </ul>
-                        <a class="btn btn-default update" href="">Обновить</a>
-                        <input class="btn btn-default check_out" type="submit" value="Оформить заказ"/>
-                    </div>
+                <div class="total_area">
+                    <ul>
+                        <li>Стоимость доставки <span>Free</span></li>
+                        <li>Итого <span id="total-order-price">@price</span></li>
+                    </ul>
+                    <a class="btn btn-default update" href="">Обновить</a>
+                    <input class="btn btn-default check_out" type="submit" value="Оформить заказ"/>
+                </div>
             }
         </div>
     </div>
