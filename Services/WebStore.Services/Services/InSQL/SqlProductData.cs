@@ -23,7 +23,7 @@ public class SqlProductData : IProductData
        .Include(b => b.Products)
        .FirstOrDefault(b => b.Id == Id);
 
-    public IEnumerable<Product> GetProducts(ProductFilter? Filter = null)
+    public ProductsPage GetProducts(ProductFilter? Filter = null)
     {
         IQueryable<Product> query = _db.Products
            .Include(p => p.Brand)
@@ -40,7 +40,24 @@ public class SqlProductData : IProductData
                 query = query.Where(p => p.BrandId == brand_id);
         }
 
-        return query;
+        var count = query.Count();
+
+        //if (Filter != null && Filter.PageSize > 0 && Filter.Page > 0)
+        //{
+        //    var page_size = (int)Filter.PageSize;
+        //    var page = Filter.Page;
+
+        //    query = query
+        //       .Skip((page - 1) * page_size)
+        //       .Take(page_size);
+        //}
+
+        if (Filter is { PageSize: > 0 and var page_size, Page: > 0 and var page })
+            query = query
+               .Skip((page - 1) * page_size)
+               .Take(page_size);
+
+        return new(query.AsEnumerable(), count);
     }
 
     public Product? GetProductById(int Id) => _db.Products
