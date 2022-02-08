@@ -31,13 +31,19 @@ public class CatalogController : Controller
             PageSize = page_size,
         };
 
-        var products = _ProductData.GetProducts(filter);
+        var (products, total_count) = _ProductData.GetProducts(filter);
 
         var catalog_model = new CatalogViewModel
         {
             BrandId = BrandId,
             SectionId = SectionId,
-            Products = products.Products.OrderBy(p => p.Order).ToView(),
+            Products = products.OrderBy(p => p.Order).ToView(),
+            PageViewModel = new()
+            {
+                Page = Page,
+                PageSize = page_size ?? 0,
+                TotalItems = total_count,
+            },
         };
 
         return View(catalog_model);
