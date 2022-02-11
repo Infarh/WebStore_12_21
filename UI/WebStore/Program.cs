@@ -11,6 +11,7 @@ using Serilog.Extensions.Logging;
 using Serilog.Formatting.Json;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
+using WebStore.Hubs;
 using WebStore.Infrastructure.Conventions;
 using WebStore.Infrastructure.Middleware;
 using WebStore.Interfaces.Services;
@@ -142,6 +143,8 @@ static IAsyncPolicy<HttpResponseMessage> GetCircuitBreakerPolicy() =>
 //services.AddAutoMapper(typeof(Program));
 services.AddAutoMapper(Assembly.GetEntryAssembly());
 
+services.AddSignalR();
+
 #endregion
 
 var app = builder.Build(); // Сборка приложения
@@ -172,6 +175,8 @@ app.UseWelcomePage("/welcome");
 
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapHub<ChatHub>("/chat");
+
     endpoints.MapControllerRoute(
         name: "areas",
         pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"

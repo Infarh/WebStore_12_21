@@ -42,4 +42,6 @@ public class AjaxTestController : Controller
             Message = msg ?? "--null--",
         });
     }
+
+    public IActionResult Chat() => View();
 }
