@@ -1,27 +1,26 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿
+using Microsoft.AspNetCore.SignalR.Client;
 
-using TestConsole.Data;
-using WebStore.Interfaces.Services;
-using WebStore.WebAPI.Clients.Products;
+var builder = new HubConnectionBuilder();
+var connection = builder
+   .WithUrl("http://localhost/chat")
+   .Build();
 
-var service_collection = new ServiceCollection();
+using var registration = connection.On<string>("MessageFromClient", MessageFromClient);
 
-
-service_collection.AddHttpClient<IProductData, ProductsClient>(http => http.BaseAddress = new("http://localhost:5001"));
-
-var provider = service_collection.BuildServiceProvider();
-
-Console.WriteLine("Ожидаем старта хоста WebAPI");
-Console.ReadLine();
-
-var product_data = provider.GetRequiredService<IProductData>();
-
-var products = product_data.GetProducts();
-
-foreach (var product in products.Products)
+static void MessageFromClient(string Message)
 {
-    Console.WriteLine("[{0,4}] {1} {2} {3}", 
-        product.Id, product.Name, product.Price, product.ImageUrl);
+    Console.WriteLine("Сообщение от сервера: {0}", Message);
 }
 
+Console.WriteLine("Ожидание сервера. Нажмите Enter для запуска соединения.");
 Console.ReadLine();
+
+await connection.StartAsync();
+Console.WriteLine("Соединение установлено");
+
+while (true)
+{
+    var message = Console.ReadLine();
+    await connection.InvokeAsync("SendMessage", message);
+}
