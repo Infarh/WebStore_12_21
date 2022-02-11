@@ -36,7 +36,7 @@
     },
     {
       "library": "aspnet-signalr@1.1.4",
-      "destination": "wwwroot/aspnet-signalr/"
+      "destination": "wwwroot/lib/aspnet-signalr/"
     }
   ]
 }
