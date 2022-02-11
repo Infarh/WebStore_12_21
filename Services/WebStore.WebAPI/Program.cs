@@ -79,9 +79,14 @@ services.Configure<IdentityOptions>(opt =>
 services.AddScoped<IEmployeesData, SqlEmployeesData>();
 services.AddScoped<IProductData, SqlProductData>();
 services.AddScoped<IOrderService, SqlOrderService>();
-//services.AddScoped<ICartService, InCookiesCartService>();
 
 var app = builder.Build();
+
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    var db_initializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+    await db_initializer.InitializeAsync(RemoveBefore: false).ConfigureAwait(true);
+}
 
 if (app.Environment.IsDevelopment())
 {

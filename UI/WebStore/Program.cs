@@ -52,27 +52,7 @@ services.AddControllersWithViews(opt =>
     opt.Conventions.Add(new TestConvention());
 });
 
-var database_type = builder.Configuration["Database"];
-switch (database_type)
-{
-    default: throw new InvalidOperationException($"Тип БД {database_type} не поддерживается");
-
-    case "SqlServer":
-        services.AddDbContext<WebStoreDB>(opt =>
-            opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
-        break;
-
-    case "Sqlite":
-        services.AddDbContext<WebStoreDB>(opt => 
-            opt.UseSqlite(builder.Configuration.GetConnectionString("Sqlite"),
-                o => o.MigrationsAssembly("WebStore.DAL.Sqlite")));
-        break;
-}
-
-services.AddTransient<IDbInitializer, DbInitializer>();
-
 services.AddIdentity<User, Role>()
-   //.AddEntityFrameworkStores<WebStoreDB>()
    .AddDefaultTokenProviders();
 
 services.AddHttpClient("WebStoreAPIIdentity", client => client.BaseAddress = new(configuration["WebAPI"]))
@@ -146,12 +126,6 @@ services.AddAutoMapper(Assembly.GetEntryAssembly());
 #endregion
 
 var app = builder.Build(); // Сборка приложения
-
-await using (var scope = app.Services.CreateAsyncScope())
-{
-    var db_initializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
-    await db_initializer.InitializeAsync(RemoveBefore: false).ConfigureAwait(true);
-}
 
 //app.Urls.Add("http://+:80"); // - если хочется обеспечить видимость приложения в локальной сети
 
